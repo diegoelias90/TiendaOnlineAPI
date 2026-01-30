@@ -1,0 +1,19 @@
+﻿@model TiendaOnlineAPI.Models.Producto
+
+<h2>Eliminar Producto</h2>
+<form asp-action="Delete" method="post">
+	<input type="hidden" asp-for="ProductoId" />
+	<div class="form-group">
+		<label>¿Está seguro que desea eliminar el siguiente producto?</label>
+		<p><strong>Nombre:</strong> @Model.Nombre</p>
+		<p><strong>Descripción:</strong> @Model.Descripcion</p>
+		<p><strong>Precio:</strong> @Model.Precio</p>
+		<p><strong>Categoría:</strong> @Model.Categoria?.Nombre</p>
+		@if (!string.IsNullOrEmpty(Model.UrlImagen))
+		{
+			<p><img src="@Model.UrlImagen" alt="@Model.Nombre" style="max-width: 100px; max-height: 100px;" /></p>
+		}
+	</div>
+	<button type="submit" class="btn btn-danger">Eliminar</button>
+	<a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

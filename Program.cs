@@ -5,8 +5,9 @@ using TiendaOnlineAPI.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 //Registrar servicios
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TiendaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 var app = builder.Build();
 
@@ -22,9 +23,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=ProductosMvc}/{action=Index}/{id?}"   
+);
 
 app.Run();
